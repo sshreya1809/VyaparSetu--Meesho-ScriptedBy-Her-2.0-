@@ -17,9 +17,12 @@ const SCENARIOS = {
         avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
         followers: '340K Followers',
         similarity: '99.9% ANN MATCH',
-        headline: '🔥 अर्का शर्मा रेकमेंडेशन: 100% कॉटन डबल बेडशीट मात्र ₹349 में!',
-        regional: 'Arka Sharma verified! Best Jaipuri double bedsheet on Meesho at factory wholesale rate ₹349. Cash on Delivery available!',
-        hindi: 'अर्का शर्मा द्वारा सत्यापित: 100% पक्का रंग जयपुरी डबल कॉटन बेडशीट मात्र ₹349 में! फ्री होम डिलीवरी और COD उपलब्ध।',
+        hook: '🎬 Reel Hook (0-3s): Unfold the vibrant Jaipuri double bedsheet in one dramatic sweep across the bed with a bold ₹349 price tag sticker overlay.',
+        valueProps: '💎 Key Selling Points: 100% Pure Cotton • Guaranteed Fast Colors (Pucca Rang) • Free Home Delivery across UP • Cash on Delivery (COD) Available.',
+        payout: '💰 Creator Sponsorship Offer: ₹18,000 Fixed Reel Integration + ₹35 Flat Affiliate Commission per order via your tracked link.',
+        headline: '🔥 अर्का शर्मा स्पेशल रेकमेंडेशन: 100% कॉटन डबल बेडशीट मात्र ₹349 में!',
+        regional: 'Verbatim English/Hinglish Script: "Guys, if you want hotel-luxury cooling cotton bedsheets for UP summer without paying ₹1200 in showrooms, check this out! Original Jaipuri 100% cotton double bedsheet with 2 pillow covers is now on Meesho for just ₹349 factory wholesale rate. Link in my bio!"',
+        hindi: '🗣️ हिंदी / अवधी स्क्रिप्ट (0-30s): "नमस्ते दोस्तों! अगर आप भी गर्मियों के लिए पक्के रंग वाली 100% कॉटन डबल बेडशीट ढूंढ रहे हैं, तो मीशो पर यह जयपुरी कलेक्शन जरूर देखें। शोरूम में ₹1200 की मिलने वाली बेडशीट यहाँ सीधे फैक्ट्री रेट मात्र ₹349 में मिल रही है। साथ में फ्री होम डिलीवरी और कैश ऑन डिलीवरी भी उपलब्ध है। तुरंत मेरे बायो के लिंक से ऑर्डर करें!"',
         phone: '918591852051',
         email: 'arkachakraborty2824@gmail.com',
         approved: true
@@ -30,9 +33,12 @@ const SCENARIOS = {
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
         followers: '84.2K Followers',
         similarity: '98.4% ANN MATCH',
+        hook: '🎬 Reel Hook (0-3s): Close-up fabric rub test showing zero color bleeding followed by smiling reaction at ₹349 invoice.',
+        valueProps: '💎 Key Selling Points: Lucknow & UP East Fast Shipping • Full King/Double Size (90x100 inch) • Machine Washable 180 TC Cotton.',
+        payout: '💰 Creator Sponsorship Offer: ₹11,000 Fixed Reel Fee + 12% Affiliate Rev-Share on all UP East conversions.',
         headline: '🛏️ लखनऊ वालो! शुद्ध 100% कॉटन बेडशीट केवल ₹349 में!',
-        regional: 'Arre Bhauji, garmi me thandak dene wali 100% pucca rang Jaipuri cotton bedsheet ab Meesho par sidhe factory rate me!',
-        hindi: 'अरे भौजी! गर्मी में ठंडक देने वाली 100% पक्का रंग जयपुरी कॉटन बेडशीट अब मीशो पर सीधे फैक्ट्री रेट ₹349 में!',
+        regional: 'Verbatim Avadhi/Hinglish Script: "Arre Bhauji! Garmi me araam aur thandak dene wali 100% pucca rang Jaipuri cotton bedsheet ab Meesho par sidhe factory rate me mil rahi hai. Pura double bed size aur do pillow cover ke sath keval ₹349!"',
+        hindi: '🗣️ अवधी / स्थानीय संवाद: "अरे भौजी! गर्मी में ठंडक देने वाली 100% पक्का रंग जयपुरी कॉटन बेडशीट अब मीशो पर सीधे फैक्ट्री रेट ₹349 में मिल रही है! रंग निकलने की कोई झंझट नहीं। नीचे दिए गए लिंक से तुरंत ऑर्डर करें।"',
         phone: '919838112044',
         email: 'pooja.tiwari.lucknow@meesho-affiliates.in',
         approved: true
@@ -53,9 +59,12 @@ const SCENARIOS = {
         avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
         followers: '210K Followers',
         similarity: '99.5% ANN MATCH',
+        hook: '🎬 Reel Hook (0-3s): Twirl in the golden Zari border Banarasi saree under festival lighting with ₹699 flash deal title card.',
+        valueProps: '💎 Key Selling Points: Heavy Golden Zari Border • Soft Litchi Silk Weave • Rich Pallu with Blouse Piece • Direct Surat Factory Rate.',
+        payout: '💰 Creator Sponsorship Offer: ₹15,000 Upfront Reel Sponsorship + ₹60 Bonus per Saree order.',
         headline: '✨ बिहार की शान: बनारसी सिल्क साड़ी मात्र ₹699 में!',
-        regional: 'Chhath aur shadi season ke liye sabse best Banarasi Saree Meesho par factory daam me!',
-        hindi: 'त्योहारों के लिए खास: असली जरी बॉर्डर बनारसी सिल्क साड़ी अब मीशो पर केवल ₹699 में उपलब्ध।',
+        regional: 'Verbatim Bhojpuri Script: "Chhath aur shadi season ke liye sabse best Banarasi Saree ab Meesho par sidhe factory daam ₹699 me! Asli Zari border aur soft silk fabric."',
+        hindi: '🗣️ भोजपुरी / हिंदी स्क्रिप्ट: "प्रणाम बिहार! शादी और त्योहारों के मौसम के लिए खास बनारसी सिल्क साड़ी अब मीशो पर केवल ₹699 में उपलब्ध है। भारी जरी पल्लू और प्रीमियम सॉफ्ट सिल्क कपड़े के साथ। स्टॉक खत्म होने से पहले ऑर्डर करें!"',
         phone: '919123456789',
         email: 'neha.bhojpuri@meesho-creators.in',
         approved: true
@@ -76,9 +85,12 @@ const SCENARIOS = {
         avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
         followers: '145K Followers',
         similarity: '99.1% ANN MATCH',
+        hook: '🎬 Reel Hook (0-3s): Walk through Jaipur Hawa Mahal backdrop wearing the breathable pure cotton block print Kurti set.',
+        valueProps: '💎 Key Selling Points: Authentic Sanganeri Hand Block Print • 3-Piece Set (Kurti, Pant & Dupatta) • 100% Breathable Cotton.',
+        payout: '💰 Creator Sponsorship Offer: ₹12,500 Fixed Sponsorship + 15% Affiliate Commission.',
         headline: '🌸 जयपुर स्पेशल ब्लॉक प्रिंट कुर्ती सेट ₹499 में!',
-        regional: 'Original Sanganeri hand block print kurti set directly from Jaipur artisans on Meesho.',
-        hindi: 'सांगानेरी हैंड ब्लॉक प्रिंट 100% कॉटन कुर्ती सेट सीधे जयपुर के कारीगरों से केवल ₹499 में।',
+        regional: 'Verbatim Script: "Original Sanganeri hand block print 3-piece kurti set directly from Jaipur artisans on Meesho at wholesale ₹499."',
+        hindi: '🗣️ हिंदी स्क्रिप्ट: "खम्मा घणी! गर्मियों के लिए सबसे आरामदायक सांगानेरी हैंड ब्लॉक प्रिंट 100% कॉटन कुर्ती सेट सीधे जयपुर के कारीगरों से मीशो पर केवल ₹499 में। तीनों पीस (कुर्ती, पैंट, दुपट्टा) के साथ!"',
         phone: '919829012345',
         email: 'kavita.jaipur@meesho-creators.in',
         approved: true
@@ -208,13 +220,35 @@ function renderScenario(key) {
           </div>
         </div>
 
-        <div class="vernacular-box">
+        <div class="vernacular-box" style="display: flex; flex-direction: column; gap: 8px;">
           <div class="vernacular-head">
-            <span>AI VERNACULAR AD COPY</span>
+            <span>AI INFLUENCER CAMPAIGN PACKAGE</span>
             <span>HUMAN-IN-THE-LOOP REVIEW</span>
           </div>
-          <div class="vernacular-text"><strong>${c.headline}</strong><br />${c.regional}</div>
-          <div class="vernacular-hindi">${c.hindi}</div>
+
+          <!-- 1. Headline & Sponsorship Offer -->
+          <div style="background: #FFF; border: 1px solid #E6E1F5; padding: 10px 12px; border-radius: 8px;">
+            <strong style="color: #4A1FB8; font-size: 14.5px; display: block; margin-bottom: 4px;">${c.headline}</strong>
+            <span style="font-size: 12.5px; color: #038D63; font-weight: 700;">${c.payout || '💰 Creator Sponsorship: Verified Integration & Rev-Share'}</span>
+          </div>
+
+          <!-- 2. Creative Hook & Selling Points -->
+          <div style="display: grid; grid-template-columns: 1fr; gap: 6px; font-size: 12.5px; color: #1E1F2C;">
+            <div style="background: #F8F9FD; padding: 8px 10px; border-radius: 6px; border-left: 3px solid #9F2089;">
+              <strong>${c.hook || '🎬 Hook Concept:'}</strong>
+            </div>
+            <div style="background: #F8F9FD; padding: 8px 10px; border-radius: 6px; border-left: 3px solid #4A1FB8;">
+              <strong>${c.valueProps || '💎 Value Propositions:'}</strong>
+            </div>
+          </div>
+
+          <!-- 3. Verbatim Script & Dialect -->
+          <div class="vernacular-text" style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px dashed #D6D0F2; font-size: 13px;">
+            ${c.regional}
+          </div>
+          <div class="vernacular-hindi" style="font-size: 13px; line-height: 1.4;">
+            ${c.hindi}
+          </div>
         </div>
 
         <div class="creator-actions">
