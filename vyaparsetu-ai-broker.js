@@ -106,7 +106,6 @@ function setupBackToMeesho() {
       e.preventDefault();
       if (window.opener && !window.opener.closed) {
         window.opener.focus();
-        window.close();
       } else {
         window.location.href = 'supplier-influencer.html';
       }
