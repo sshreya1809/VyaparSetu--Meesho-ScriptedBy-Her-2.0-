@@ -721,3 +721,71 @@ body.dark-theme .channel-actions-bar {
   background: #1F2233;
   border-top-color: #31344D;
 }
+
+/* ==================== HIGH CONTRAST DARK MODE TEXT & SURFACES ==================== */
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme .creator-name,
+body.dark-theme .nlp-val,
+body.dark-theme .bubble-sender,
+body.dark-theme .bubble-text {
+  color: #FFFFFF !important;
+}
+
+body.dark-theme p,
+body.dark-theme .creator-meta,
+body.dark-theme .nlp-label,
+body.dark-theme .outreach-label,
+body.dark-theme .bubble-meta {
+  color: #B4B8D8 !important;
+}
+
+body.dark-theme .similarity-badge {
+  color: #A480FF !important;
+}
+
+body.dark-theme .intent-card,
+body.dark-theme .nlp-field,
+body.dark-theme .human-review-box,
+body.dark-theme .status-banner-box,
+body.dark-theme .realtime-outreach-box,
+body.dark-theme .creator-card,
+body.dark-theme .message-bubble-card {
+  background: #181A26 !important;
+  border-color: #2D3047 !important;
+  color: #FFFFFF !important;
+}
+
+body.dark-theme .prompt-textarea {
+  background: #0F1018 !important;
+  border-color: #383B58 !important;
+  color: #FFFFFF !important;
+}
+
+body.dark-theme .prompt-textarea::placeholder {
+  color: #6A6E88 !important;
+}
+
+body.dark-theme .bottom-launch-bar {
+  background: #151722 !important;
+  border-color: #2D3047 !important;
+}
+
+body.dark-theme .bottom-launch-bar h3 {
+  color: #FFFFFF !important;
+}
+
+body.dark-theme .bottom-launch-bar p {
+  color: #B4B8D8 !important;
+}
+
+body.dark-theme .btn-voice-record {
+  background: #26283C !important;
+  color: #C1A6FF !important;
+}
+
+body.dark-theme .bubble-btn {
+  background: #222538 !important;
+}

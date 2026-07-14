@@ -49,13 +49,13 @@
     <div class="tab-view active" id="tab-broker">
       
       <!-- Live Campaign Status Banner (Dynamically updated when launched) -->
-      <div id="campaign-status-banner" style="display: none; background: #E8F7F0; border: 2px solid #038D63; border-radius: 16px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(3, 141, 99, 0.15);">
+      <div id="campaign-status-banner" class="status-banner-box" style="display: none;">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
           <div style="display: flex; align-items: center; gap: 14px;">
             <div style="width: 44px; height: 44px; border-radius: 12px; background: #038D63; color: #FFF; font-size: 22px; display: flex; align-items: center; justify-content: center;">🎉</div>
             <div>
               <h2 style="font-size: 18px; font-weight: 800; color: #038D63; margin: 0;">CAMPAIGN LIVE & ACTIVE</h2>
-              <p style="font-size: 13.5px; color: #1E1F2C; margin: 2px 0 0;">Automated outreach dispatched! Click the WhatsApp, SMS, or Email buttons below to view live sent messages.</p>
+              <p style="font-size: 13.5px; color: var(--text-dark); margin: 2px 0 0;">Automated outreach dispatched! Click the WhatsApp, SMS, or Email buttons below to view live sent messages.</p>
             </div>
           </div>
           <div style="display: flex; gap: 12px; align-items: center;">
@@ -66,13 +66,13 @@
       </div>
 
       <!-- Real-Time Live Outreach & Influencer Response Stream -->
-      <div id="realtime-outreach-center" style="display: none; background: #FFFFFF; border: 1.5px solid #4A1FB8; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(74, 31, 184, 0.12);">
-        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E6E1F5; padding-bottom: 14px; margin-bottom: 18px;">
+      <div id="realtime-outreach-center" class="realtime-outreach-box" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; margin-bottom: 18px;">
           <div style="display: flex; align-items: center; gap: 10px;">
             <span style="width: 10px; height: 10px; border-radius: 50%; background: #038D63; box-shadow: 0 0 10px #038D63; display: inline-block;"></span>
-            <h3 style="font-size: 16px; font-weight: 800; color: #1E1F2C; margin: 0;">🟢 LIVE REAL-TIME INFLUENCER MESSAGING FEED</h3>
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin: 0;">🟢 LIVE REAL-TIME INFLUENCER MESSAGING FEED</h3>
           </div>
-          <span style="font-size: 12px; font-weight: 700; color: #4A1FB8; background: #EEECFA; padding: 4px 12px; border-radius: 20px;">Real-Time Webhook Active</span>
+          <span style="font-size: 12px; font-weight: 700; color: var(--primary-purple); background: #EEECFA; padding: 4px 12px; border-radius: 20px;">Real-Time Webhook Active</span>
         </div>
 
         <div id="realtime-message-feed" style="display: flex; flex-direction: column; gap: 14px; max-height: 380px; overflow-y: auto; padding-right: 8px;">
@@ -140,7 +140,7 @@
       </div>
 
       <!-- Human-in-the-Loop Vernacular Ad Review Card -->
-      <div style="background: #F8F6FD; border: 1.5px solid #D8CEFF; padding: 22px 26px; border-radius: 16px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between;">
+      <div class="human-review-box">
         <div>
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
             <span style="background: var(--primary-purple); color: #FFFFFF; font-weight: 800; font-size: 11px; padding: 4px 12px; border-radius: 20px;">STAGE 4 REQUIRED</span>

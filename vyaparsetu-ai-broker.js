@@ -263,10 +263,10 @@ function renderScenario(key) {
           <img src="${c.avatar}" class="creator-avatar" alt="${c.name}" />
           <div class="creator-info">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-              <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: #1E1F2C;">${c.name}</h3>
+              <h3 class="creator-name" style="margin: 0; font-size: 16px; font-weight: 800; color: var(--text-dark);">${c.name}</h3>
               ${isCampaignLaunched ? '<span style="background: #038D63; color: #FFF; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 12px;">DISPATCHED ✓</span>' : ''}
             </div>
-            <div class="creator-meta" style="font-size: 13px; color: #58596B; margin-bottom: 6px;">${c.followers} • Regional Match</div>
+            <div class="creator-meta" style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;">${c.followers} • Regional Match</div>
             <span class="similarity-badge" style="display: inline-block;">⚡ ${c.similarity}</span>
           </div>
         </div>
@@ -278,8 +278,8 @@ function renderScenario(key) {
           </div>
 
           <!-- REAL CLICKABLE MULTI-CHANNEL OUTREACH LINKS -->
-          <div style="border-top: 1px solid #E6E1F5; padding-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-            <span style="font-size: 10.5px; font-weight: 700; color: #58596B; text-transform: uppercase; letter-spacing: 0.5px;">Real Direct Outreach (Sends Full Ad Brief)</span>
+          <div style="border-top: 1px solid var(--border-color); padding-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+            <span class="outreach-label" style="font-size: 10.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Real Direct Outreach (Sends Full Ad Brief)</span>
             <a href="${whatsappUrl}" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: #E8F7F0; color: #038D63; text-decoration: none; font-size: 13px; font-weight: 700; padding: 10px; border-radius: 8px; border: 1px solid #BCEAD5;">
               <span>💬 Send via WhatsApp</span>
               <span>↗</span>
@@ -463,6 +463,7 @@ function setupLaunchDispatch() {
               : 'background: #EEECFA; color: #4A1FB8; border: 1px solid #D6D0F2;';
 
             const bubble = document.createElement('div');
+            bubble.className = 'message-bubble-card';
             bubble.style.background = item.color;
             bubble.style.borderLeft = `4px solid ${item.borderColor}`;
             bubble.style.padding = '14px 18px';
@@ -472,12 +473,12 @@ function setupLaunchDispatch() {
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span style="font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 6px; ${badgeStyle}">${item.channel}</span>
-                  <span style="font-size: 13px; font-weight: 800; color: #1E1F2C;">${item.sender}</span>
+                  <span class="bubble-sender" style="font-size: 13px; font-weight: 800; color: var(--text-dark);">${item.sender}</span>
                 </div>
-                <span style="font-size: 11.5px; color: #58596B;">${item.meta}</span>
+                <span class="bubble-meta" style="font-size: 11.5px; color: var(--text-muted);">${item.meta}</span>
               </div>
-              <p style="font-size: 14px; color: #1E1F2C; margin: 0 0 10px;">${item.text}</p>
-              <a href="${item.actionLink}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: ${item.borderColor}; text-decoration: none; background: #FFF; border: 1px solid ${item.borderColor}; padding: 5px 12px; border-radius: 6px;">
+              <p class="bubble-text" style="font-size: 14px; color: var(--text-dark); margin: 0 0 10px;">${item.text}</p>
+              <a href="${item.actionLink}" target="_blank" class="bubble-btn" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: ${item.borderColor}; text-decoration: none; background: #FFF; border: 1px solid ${item.borderColor}; padding: 5px 12px; border-radius: 6px;">
                 <span>${item.actionText}</span>
                 <span>↗</span>
               </a>
