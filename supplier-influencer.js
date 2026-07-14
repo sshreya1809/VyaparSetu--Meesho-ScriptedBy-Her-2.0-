@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadStoreProfile();
   setupCatalogSelectionModal();
   setupESignatureAlert();
+  setupAIRobotAutomation();
 });
 
 function loadStoreProfile() {
@@ -117,6 +118,70 @@ function setupESignatureAlert() {
           </div>
         `;
       }
+    });
+  }
+}
+
+function setupAIRobotAutomation() {
+  const openBtn = document.getElementById('btn-open-ai-robot');
+  const modal = document.getElementById('ai-console-modal');
+  const closeBtn = document.getElementById('btn-close-ai-modal');
+  const cancelBtn = document.getElementById('btn-cancel-ai-modal');
+  const activateBtn = document.getElementById('btn-confirm-ai-activate');
+  const terminalLog = document.getElementById('ai-terminal-log');
+
+  const openModal = () => modal?.classList.add('active');
+  const closeModal = () => modal?.classList.remove('active');
+
+  if (openBtn) openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+  if (activateBtn) {
+    activateBtn.addEventListener('click', () => {
+      activateBtn.disabled = true;
+      activateBtn.textContent = '🤖 Autonomous AI Running...';
+      
+      const lines = [
+        '[00:01s] Scanning Meesho Catalog Database (meesho_supplier_catalogs)...',
+        '[00:02s] Found 3 Active SKUs -> Matching with Top Reel Creators...',
+        '[00:03s] SKU MSH-KRTI-101 matched with @lishapatel._ (Reach: 450k views)',
+        '[00:04s] Dynamic Commission auto-balanced to 8.2% ROI to outbid competitors.',
+        '[00:05s] ✅ AUTONOMOUS INFLUENCER AUTO-PILOT ENGAGED! 🚀'
+      ];
+
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < lines.length) {
+          if (terminalLog) {
+            terminalLog.innerHTML += `\n${lines[i]}`;
+            terminalLog.scrollTop = terminalLog.scrollHeight;
+          }
+          i++;
+        } else {
+          clearInterval(interval);
+          alert('🎉 Autonomous Influencer Auto-Pilot Activated!\n\nVyaparSetu Bot 2.0 is now automatically managing influencer reels & commissions for your catalogs 24/7.');
+          closeModal();
+          activateBtn.disabled = false;
+          activateBtn.textContent = '🚀 Activate Autonomous AI Mode';
+
+          if (openBtn) {
+            openBtn.innerHTML = `
+              <span class="robot-btn-icon">🤖</span>
+              <span>AI Auto-Pilot ACTIVE (3 Campaigns Live) ✨</span>
+            `;
+            openBtn.style.background = 'linear-gradient(135deg, #038D63 0%, #05B37E 100%)';
+            openBtn.style.boxShadow = '0 8px 24px rgba(3, 141, 99, 0.4)';
+          }
+
+          const statusPill = document.querySelector('.ai-status-pill');
+          if (statusPill) {
+            statusPill.textContent = 'AUTO-PILOT ACTIVE 🟢';
+            statusPill.style.background = '#E8F7F0';
+            statusPill.style.color = '#038D63';
+          }
+        }
+      }, 500);
     });
   }
 }
