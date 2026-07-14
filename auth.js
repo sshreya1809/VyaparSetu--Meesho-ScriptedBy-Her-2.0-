@@ -227,7 +227,8 @@ function handleJwtAuth() {
   localStorage.setItem('meesho_auth_header', `Bearer ${fullJwtString}`);
   sessionStorage.setItem('session_jwt', fullJwtString);
 
-  displayJwtInspectorModal(activeJwtData);
+  // Directly redirect authenticated user to Supplier Dashboard
+  window.location.href = 'supplier-dashboard.html';
 }
 
 function handleOAuthLogin(provider) {
@@ -359,7 +360,8 @@ function completeOAuthLogin(provider, customEmail, customTitle, realAccessToken)
   sessionStorage.setItem('session_jwt', fullJwtString);
   sessionStorage.setItem('session_oauth_access', oauthAccessToken);
 
-  displayJwtInspectorModal(activeJwtData);
+  // Directly redirect authenticated user to Supplier Dashboard
+  window.location.href = 'supplier-dashboard.html';
 }
 
 function displayJwtInspectorModal(jwtData) {
