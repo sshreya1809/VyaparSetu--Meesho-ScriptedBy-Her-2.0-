@@ -124,18 +124,11 @@ function setupESignatureAlert() {
 
 function setupAIRobotAutomation() {
   const openBtn = document.getElementById('btn-open-ai-robot');
-  const modal = document.getElementById('ai-console-modal');
-  const closeBtn = document.getElementById('btn-close-ai-modal');
-  const cancelBtn = document.getElementById('btn-cancel-ai-modal');
-  const activateBtn = document.getElementById('btn-confirm-ai-activate');
-  const terminalLog = document.getElementById('ai-terminal-log');
-
-  const openModal = () => modal?.classList.add('active');
-  const closeModal = () => modal?.classList.remove('active');
-
-  if (openBtn) openBtn.addEventListener('click', openModal);
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      window.open('vyaparsetu-ai-broker.html', '_blank');
+    });
+  }
 
   if (activateBtn) {
     activateBtn.addEventListener('click', () => {
