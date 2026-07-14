@@ -2,6 +2,12 @@
  * Meesho Supplier Prototype - JWT Authentication Engine & Auth Panel Logic
  */
 
+// ==================== GOOGLE OAUTH CONFIGURATION ====================
+// Replace 'YOUR_GOOGLE_CLIENT_ID_HERE' below with your copied Client ID from Google Cloud Console
+// Example: const GOOGLE_CLIENT_ID = '1234567890-abcdefghijklmnop.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID_HERE';
+// ====================================================================
+
 let currentAuthMode = 'signup';
 let activeJwtData = null;
 
@@ -225,25 +231,61 @@ function handleJwtAuth() {
 }
 
 function handleOAuthLogin(provider) {
+  // Check if real Google Identity Services SDK should be triggered
+  if (provider === 'google' && typeof GOOGLE_CLIENT_ID !== 'undefined' && GOOGLE_CLIENT_ID && GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID_HERE' && window.google && window.google.accounts && window.google.accounts.oauth2) {
+    try {
+      const tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: GOOGLE_CLIENT_ID,
+        scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid',
+        callback: async (tokenResponse) => {
+          if (tokenResponse && tokenResponse.access_token) {
+            let userEmail = 'supplier.partner@gmail.com';
+            let userName = 'Google Verified Account';
+            try {
+              const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+              });
+              const userInfo = await userInfoRes.json();
+              if (userInfo.email) userEmail = userInfo.email;
+              if (userInfo.name) userName = userInfo.name;
+            } catch (err) {
+              console.warn('Could not fetch detailed Google profile, using default verified claims.');
+            }
+            completeOAuthLogin('google', userEmail, userName, tokenResponse.access_token);
+          }
+        },
+      });
+      tokenClient.requestAccessToken();
+      return;
+    } catch (e) {
+      console.error('Google Sign-In initialization failed or blocked. Falling back to prototype verification:', e);
+    }
+  }
+
+  // Graceful Prototype Authentication (if GOOGLE_CLIENT_ID is not set or for instant testing)
+  completeOAuthLogin(provider);
+}
+window.handleOAuthLogin = handleOAuthLogin;
+
+function completeOAuthLogin(provider, customEmail, customTitle, realAccessToken) {
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + 86400; // 24 hours
 
-  let identifier, gstin, authType, providerTitle;
+  let identifier = customEmail || 'DIGILOCKER_GSTIN_USER';
+  let gstin = '27DIGILOCKER001Z9';
+  let authType = 'OAUTH2_DIGILOCKER_GOVT';
+  let providerTitle = customTitle || 'DigiLocker / GST Portal Verified';
+
   if (provider === 'google') {
-    identifier = 'supplier.partner@gmail.com';
+    identifier = customEmail || 'supplier.partner@gmail.com';
     gstin = '29GOOGLE8819F1Z5';
     authType = 'OAUTH2_GOOGLE_OIDC';
-    providerTitle = 'Google Verified Account';
+    providerTitle = customTitle || 'Google Verified Account';
   } else if (provider === 'whatsapp') {
     identifier = '+91 9876543210 (Verified WhatsApp API)';
     gstin = '29WHATSAPP9912Z1';
     authType = 'OAUTH2_WHATSAPP_CLOUD';
     providerTitle = 'WhatsApp Verified Account';
-  } else {
-    identifier = 'DIGILOCKER_GSTIN_USER';
-    gstin = '27DIGILOCKER001Z9';
-    authType = 'OAUTH2_DIGILOCKER_GOVT';
-    providerTitle = 'DigiLocker / GST Portal Verified';
   }
 
   // Save OAuth verified profile to user database automatically
@@ -258,11 +300,12 @@ function handleOAuthLogin(provider) {
   };
   saveUserToDatabase(oauthUserRecord);
 
-  const oauthAccessToken = `bearer_oauth_${provider}_` + Math.random().toString(36).substring(2, 12) + Math.random().toString(36).substring(2, 12);
+  const oauthAccessToken = realAccessToken || (`bearer_oauth_${provider}_` + Math.random().toString(36).substring(2, 12) + Math.random().toString(36).substring(2, 12));
   const oauthIdTokenClaims = {
     iss: `https://auth.${provider}.com/oauth2/v2`,
     sub: `sub_oauth_${Math.floor(10000 + Math.random() * 90000)}`,
-    aud: 'meesho_supplier_client_id_2026',
+    aud: typeof GOOGLE_CLIENT_ID !== 'undefined' && GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID_HERE' ? GOOGLE_CLIENT_ID : 'meesho_supplier_client_id_2026',
+    email: identifier,
     email_verified: true,
     phone_number_verified: true,
     gstin_verified: true,
@@ -318,7 +361,6 @@ function handleOAuthLogin(provider) {
 
   displayJwtInspectorModal(activeJwtData);
 }
-window.handleOAuthLogin = handleOAuthLogin;
 
 function displayJwtInspectorModal(jwtData) {
   const modal = document.getElementById('jwt-inspector-modal');
