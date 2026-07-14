@@ -326,50 +326,86 @@ function setupLaunchDispatch() {
         }, (i + 1) * 450);
       });
 
-      // Populate Live Real-Time Messaging Feed Stream
+      // Populate Live Real-Time Messaging Feed Stream (WhatsApp + SMS + Email)
       if (realtimeFeed) {
         realtimeFeed.innerHTML = '';
         const streamMessages = [
           {
             delay: 400,
-            sender: 'OUTGOING • WhatsApp Cloud API',
+            channel: 'WHATSAPP',
+            sender: 'OUTGOING • WhatsApp Cloud API (wa.me)',
             meta: 'To: Arka Sharma (+91 8591852051) • Status: Delivered & Read ✓✓',
             color: '#E8F7F0',
             borderColor: '#038D63',
             text: '🔥 अर्का शर्मा रेकमेंडेशन: 100% कॉटन डबल बेडशीट मात्र ₹349 में! फ्री होम डिलीवरी और COD उपलब्ध।',
-            waLink: 'https://wa.me/918591852051?text=' + encodeURIComponent('🔥 अर्का शर्मा रेकमेंडेशन: 100% कॉटन डबल बेडशीट मात्र ₹349 में! फ्री होम डिलीवरी और COD उपलब्ध।')
+            actionText: '💬 Open Real WhatsApp Chat',
+            actionLink: 'https://wa.me/918591852051?text=' + encodeURIComponent('🔥 अर्का शर्मा रेकमेंडेशन: 100% कॉटन डबल बेडशीट मात्र ₹349 में! फ्री होम डिलीवरी और COD उपलब्ध।')
           },
           {
-            delay: 1100,
+            delay: 1000,
+            channel: 'SMS',
             sender: 'OUTGOING • TRAI DLT SMS Gateway',
             meta: 'To: Pooja Tiwari (+91 9838112044) • Status: Delivered ✓✓ (#MSH-88219)',
             color: '#EEECFA',
             borderColor: '#4A1FB8',
-            text: 'Meesho Sponsorship Brief: 100% pucca rang Jaipuri cotton bedsheet at factory rate ₹349. Campaign referral active.',
-            waLink: 'sms:+919838112044?body=' + encodeURIComponent('Meesho Sponsorship Brief: 100% pucca rang Jaipuri cotton bedsheet at factory rate ₹349.')
+            text: 'Meesho Sponsorship Alert: 100% pucca rang Jaipuri cotton bedsheet at factory rate ₹349. Campaign referral active.',
+            actionText: '📱 Send Real SMS to Device',
+            actionLink: 'sms:+919838112044?body=' + encodeURIComponent('Meesho Sponsorship Alert: 100% pucca rang Jaipuri cotton bedsheet at factory rate ₹349.')
           },
           {
-            delay: 2400,
+            delay: 1700,
+            channel: 'EMAIL',
+            sender: 'OUTGOING • Gmail SMTP Relay (Campaign Brief)',
+            meta: 'To: arkachakraborty2824@gmail.com • Status: 250 2.0.0 OK Handshake ✓',
+            color: '#FFF5F7',
+            borderColor: '#D3184B',
+            text: 'Subject: Meesho Sponsorship Campaign Brief — UP East Bedsheets (₹349)<br />Attached: High-res product images, GST verified invoice tag & Avadhi ad copy.',
+            actionText: '✉️ Open Real Email in Gmail',
+            actionLink: 'mailto:arkachakraborty2824@gmail.com?subject=Meesho%20Sponsorship%20Campaign%20Brief&body=' + encodeURIComponent('Hi Arka, please find attached the Meesho Sponsorship Campaign brief for Jaipuri Bedsheets.')
+          },
+          {
+            delay: 2600,
+            channel: 'WHATSAPP',
             sender: 'INCOMING REPLY • Arka Sharma (Verified Creator)',
             meta: 'Just now • WhatsApp Chat Reply 💬',
             color: '#FFFFFF',
-            borderColor: '#9F2089',
+            borderColor: '#038D63',
             text: 'Hey Meesho Team! Received the brief & sample link for Jaipuri Bedsheets (₹349). Campaign reel goes live tomorrow at 6 PM! 🚀',
-            waLink: 'https://wa.me/918591852051?text=Thanks%20Arka!'
+            actionText: '💬 Reply on WhatsApp',
+            actionLink: 'https://wa.me/918591852051?text=Thanks%20Arka!'
           },
           {
-            delay: 3800,
-            sender: 'INCOMING REPLY • Pooja Tiwari (Verified Creator)',
-            meta: 'Just now • WhatsApp Chat Reply 💬',
+            delay: 3500,
+            channel: 'EMAIL',
+            sender: 'INCOMING EMAIL REPLY • Arka Sharma (arkachakraborty2824@gmail.com)',
+            meta: 'Just now • Email Handshake ACK ✉️',
             color: '#FFFFFF',
-            borderColor: '#038D63',
-            text: 'Namaste Bhauji! Link mil gaya hai. WhatsApp story aur Meesho affiliate link add kar rahi hoon right now! ✨',
-            waLink: 'https://wa.me/919838112044?text=Thanks%20Pooja!'
+            borderColor: '#D3184B',
+            text: 'Re: Meesho Sponsorship Campaign Brief — Draft reel video and e-signature verified GST invoice have been uploaded to the portal.',
+            actionText: '✉️ Reply via Email',
+            actionLink: 'mailto:arkachakraborty2824@gmail.com?subject=Re:%20Meesho%20Sponsorship%20Campaign%20Brief'
+          },
+          {
+            delay: 4300,
+            channel: 'SMS',
+            sender: 'INCOMING SMS ACK • Pooja Tiwari (+91 9838112044)',
+            meta: 'Just now • DLT SMS ACK 📱',
+            color: '#FFFFFF',
+            borderColor: '#4A1FB8',
+            text: 'Namaste Bhauji! SMS link mil gaya hai. WhatsApp story aur Meesho affiliate link add kar diya hai! ✨',
+            actionText: '📱 Reply via SMS',
+            actionLink: 'sms:+919838112044?body=Thanks%20Pooja!'
           }
         ];
 
         streamMessages.forEach(item => {
           setTimeout(() => {
+            const badgeStyle = item.channel === 'WHATSAPP' 
+              ? 'background: #E8F7F0; color: #038D63; border: 1px solid #BCEAD5;'
+              : item.channel === 'EMAIL'
+              ? 'background: #FFF5F7; color: #D3184B; border: 1px solid #F8CCD8;'
+              : 'background: #EEECFA; color: #4A1FB8; border: 1px solid #D6D0F2;';
+
             const bubble = document.createElement('div');
             bubble.style.background = item.color;
             bubble.style.borderLeft = `4px solid ${item.borderColor}`;
@@ -377,13 +413,17 @@ function setupLaunchDispatch() {
             bubble.style.borderRadius = '10px';
             bubble.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
             bubble.innerHTML = `
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 13px; font-weight: 800; color: #1E1F2C;">${item.sender}</span>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 6px; ${badgeStyle}">${item.channel}</span>
+                  <span style="font-size: 13px; font-weight: 800; color: #1E1F2C;">${item.sender}</span>
+                </div>
                 <span style="font-size: 11.5px; color: #58596B;">${item.meta}</span>
               </div>
               <p style="font-size: 14px; color: #1E1F2C; margin: 0 0 10px;">${item.text}</p>
-              <a href="${item.waLink}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #038D63; text-decoration: none; background: #FFF; border: 1px solid #038D63; padding: 5px 12px; border-radius: 6px;">
-                <span>↗ Open Real Chat / Message</span>
+              <a href="${item.actionLink}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: ${item.borderColor}; text-decoration: none; background: #FFF; border: 1px solid ${item.borderColor}; padding: 5px 12px; border-radius: 6px;">
+                <span>${item.actionText}</span>
+                <span>↗</span>
               </a>
             `;
             realtimeFeed.appendChild(bubble);
