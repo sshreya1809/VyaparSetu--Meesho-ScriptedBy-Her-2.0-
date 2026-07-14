@@ -194,10 +194,10 @@ function toggleCreatorStatus(id, isApproved) {
   if (card) {
     if (isApproved) {
       card.style.opacity = '1';
-      card.style.borderColor = '#00f59b';
+      card.style.borderColor = '#4A1FB8';
     } else {
       card.style.opacity = '0.45';
-      card.style.borderColor = '#ff4458';
+      card.style.borderColor = '#D3184B';
     }
   }
 }
