@@ -272,6 +272,26 @@ button {
   background: #DFDCF7;
 }
 
+.btn-hub-logout {
+  font-size: 13px;
+  font-weight: 700;
+  color: #DC2626;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #FEE2E2;
+  border: 1px solid #FECACA;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.btn-hub-logout:hover {
+  background: #FCA5A5;
+  color: #991B1B;
+}
+
 /* Dashboard Body Padding */
 .dashboard-content-pad {
   padding: 24px 32px 48px 32px;

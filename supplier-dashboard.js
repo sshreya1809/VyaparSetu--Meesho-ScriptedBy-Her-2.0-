@@ -12,13 +12,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadJwtSessionProfile() {
   const userJson = localStorage.getItem('meesho_supplier_user');
-  let supplierName = 'Frostilicious'; // Default store name from user's screenshot
+  const jwtToken = localStorage.getItem('meesho_supplier_jwt');
+  let supplierName = 'Frostilicious'; // Default demo store name
+
+  const nameEl = document.getElementById('hub-welcome-name');
+  const storeSelectorEl = document.getElementById('store-name-display');
+  const storeAvatarEl = document.getElementById('store-avatar-char');
+  const logoutBtn = document.querySelector('.btn-hub-logout');
+
+  if (!userJson && !jwtToken) {
+    // No active session detected (User has logged out or hasn't signed in)
+    if (nameEl) nameEl.textContent = 'Welcome Guest (Not Logged In)';
+    if (storeSelectorEl) storeSelectorEl.textContent = 'Guest Store';
+    if (storeAvatarEl) storeAvatarEl.textContent = '🔒';
+    if (logoutBtn) {
+      logoutBtn.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+        <span>Sign In</span>
+      `;
+      logoutBtn.onclick = () => window.location.href = 'supplier-auth.html?mode=login';
+      logoutBtn.style.background = '#EEECFA';
+      logoutBtn.style.color = '#9F2089';
+      logoutBtn.style.borderColor = '#C4BAF0';
+    }
+    return;
+  }
 
   if (userJson) {
     try {
       const user = JSON.parse(userJson);
       if (user.identifier) {
-        // Create a display name if identifier was entered
         const cleanId = user.identifier.split('@')[0];
         supplierName = cleanId.charAt(0).toUpperCase() + cleanId.slice(1);
       }
@@ -26,10 +49,6 @@ function loadJwtSessionProfile() {
       console.warn('Error reading session user:', err);
     }
   }
-
-  const nameEl = document.getElementById('hub-welcome-name');
-  const storeSelectorEl = document.getElementById('store-name-display');
-  const storeAvatarEl = document.getElementById('store-avatar-char');
 
   if (nameEl) nameEl.textContent = `Welcome ${supplierName}`;
   if (storeSelectorEl) storeSelectorEl.textContent = supplierName;
@@ -111,3 +130,58 @@ function setupSidebarNavigation() {
     });
   });
 }
+
+/* ============================ REAL LOGOUT FUNCTIONALITY ============================ */
+function handleSupplierLogout() {
+  if (!confirm('Are you sure you want to log out from Meesho Supplier Hub? This will erase all authenticated session tokens and redirect you to the login screen.')) {
+    return;
+  }
+
+  // Revoke Google OAuth Access Token if active
+  const oauthAccess = localStorage.getItem('meesho_oauth_access_token');
+  if (oauthAccess && window.google && window.google.accounts && window.google.accounts.oauth2) {
+    try {
+      google.accounts.oauth2.revoke(oauthAccess, () => {
+        console.log('Google OAuth token revoked from server.');
+      });
+    } catch (e) {
+      console.warn('Could not revoke Google OAuth token:', e);
+    }
+  }
+
+  // Update persistent user database state to unauthenticated
+  try {
+    const userJson = localStorage.getItem('meesho_supplier_user');
+    if (userJson) {
+      const userObj = JSON.parse(userJson);
+      const dbJson = localStorage.getItem('meesho_supplier_users_db');
+      if (dbJson && userObj.identifier) {
+        const db = JSON.parse(dbJson);
+        if (db[userObj.identifier]) {
+          db[userObj.identifier].authenticated = false;
+          localStorage.setItem('meesho_supplier_users_db', JSON.stringify(db));
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Error updating database logout state:', err);
+  }
+
+  // Erase ALL supplier authenticated details and JWT tokens across local and session storage
+  const keysToRemove = [
+    'meesho_supplier_jwt',
+    'meesho_supplier_user',
+    'meesho_auth_header',
+    'meesho_oauth_access_token',
+    'meesho_oauth_id_token',
+    'meesho_oauth_provider'
+  ];
+  keysToRemove.forEach(key => localStorage.removeItem(key));
+
+  sessionStorage.removeItem('session_jwt');
+  sessionStorage.removeItem('session_oauth_access');
+
+  alert('✓ Successfully logged out! Authenticated session tokens and user details have been erased.');
+  window.location.href = 'supplier-auth.html?mode=login';
+}
+window.handleSupplierLogout = handleSupplierLogout;

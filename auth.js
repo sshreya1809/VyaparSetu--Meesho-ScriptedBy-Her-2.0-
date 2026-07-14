@@ -417,3 +417,58 @@ function finishLoginRedirect() {
   window.location.href = 'supplier-dashboard.html';
 }
 
+/* ============================ GLOBAL LOGOUT FUNCTIONALITY ============================ */
+function handleSupplierLogout() {
+  if (!confirm('Are you sure you want to log out from Meesho Supplier Hub? This will erase all authenticated session tokens and redirect you to the login screen.')) {
+    return;
+  }
+
+  // Revoke Google OAuth Access Token if active
+  const oauthAccess = localStorage.getItem('meesho_oauth_access_token');
+  if (oauthAccess && window.google && window.google.accounts && window.google.accounts.oauth2) {
+    try {
+      google.accounts.oauth2.revoke(oauthAccess, () => {
+        console.log('Google OAuth token revoked from server.');
+      });
+    } catch (e) {
+      console.warn('Could not revoke Google OAuth token:', e);
+    }
+  }
+
+  // Update persistent user database state to unauthenticated
+  try {
+    const userJson = localStorage.getItem('meesho_supplier_user');
+    if (userJson) {
+      const userObj = JSON.parse(userJson);
+      const dbJson = localStorage.getItem('meesho_supplier_users_db');
+      if (dbJson && userObj.identifier) {
+        const db = JSON.parse(dbJson);
+        if (db[userObj.identifier]) {
+          db[userObj.identifier].authenticated = false;
+          localStorage.setItem('meesho_supplier_users_db', JSON.stringify(db));
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Error updating database logout state:', err);
+  }
+
+  // Erase ALL supplier authenticated details and JWT tokens across local and session storage
+  const keysToRemove = [
+    'meesho_supplier_jwt',
+    'meesho_supplier_user',
+    'meesho_auth_header',
+    'meesho_oauth_access_token',
+    'meesho_oauth_id_token',
+    'meesho_oauth_provider'
+  ];
+  keysToRemove.forEach(key => localStorage.removeItem(key));
+
+  sessionStorage.removeItem('session_jwt');
+  sessionStorage.removeItem('session_oauth_access');
+
+  alert('✓ Successfully logged out! Authenticated session tokens and user details have been erased.');
+  window.location.href = 'supplier-auth.html?mode=login';
+}
+window.handleSupplierLogout = handleSupplierLogout;
+
