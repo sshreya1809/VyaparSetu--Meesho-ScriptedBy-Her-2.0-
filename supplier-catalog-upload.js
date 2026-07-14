@@ -2,6 +2,17 @@
  * Meesho Supplier Hub - Catalog Database & Upload Engine
  */
 
+// ==================== STRICT AUTHENTICATION GUARD ====================
+(function enforceSupplierAuthentication() {
+  const jwt = localStorage.getItem('meesho_supplier_jwt') || sessionStorage.getItem('session_jwt');
+  const user = localStorage.getItem('meesho_supplier_user');
+  if (!jwt && !user) {
+    // Unauthenticated access blocked: immediately redirect to login
+    window.location.href = 'supplier-auth.html?mode=login';
+  }
+})();
+// =======================================================================
+
 const DEFAULT_CATALOGS = [
   {
     id: 'MSH-KRTI-101',
